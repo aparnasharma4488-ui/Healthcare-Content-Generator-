@@ -19,5 +19,5 @@ python -m pip install -r requirements.txt
 To deactivate:
 
 ```powershell
-deactivate
+deactivate.
 ```
