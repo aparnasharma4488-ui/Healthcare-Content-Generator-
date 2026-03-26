@@ -1,9 +1,0 @@
-Healthbot/
-__pycache__/
-.venv/
-*.pyc
-env/
-venv/
-dist/
-build/
-*.egg-info/
