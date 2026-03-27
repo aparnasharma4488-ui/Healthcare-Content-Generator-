@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedScribe - Automated Patient Summary Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <header class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <i class="fa-solid fa-stethoscope logo-icon"></i>
+                <h1>MedScribe <span>Pro</span></h1>
+            </div>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <div class="avatar"><i class="fa-solid fa-user-doctor"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Split Layout -->
+        <div class="layout-grid">
+            <!-- Left Side: Data Entry Form -->
+            <section class="card input-section">
+                <div class="card-header">
+                    <h2><i class="fa-regular fa-pen-to-square"></i> Patient Data Entry</h2>
+                    <p class="subtitle">Fill out the details to generate an automated report.</p>
+                </div>
+
+                <form id="report-form" class="form-grid">
+                    <!-- Demographics -->
+                    <div class="form-group full-width">
+                        <h3>Demographics</h3>
+                        <div class="divider"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="patientName">Patient Name</label>
+                        <input type="text" id="patientName" placeholder="e.g. John Doe">
+                    </div>
+
+                    <div class="form-group row-group">
+                        <div class="sub-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" placeholder="Yrs">
+                        </div>
+                        <div class="sub-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender">
+                                <option value="">Select...</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visitDate">Date of Visit</label>
+                        <input type="date" id="visitDate">
+                    </div>
+
+                    <!-- Clinical Information -->
+                    <div class="form-group full-width mt-4">
+                        <h3>Clinical Information</h3>
+                        <div class="divider"></div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="chiefComplaint">Chief Complaint</label>
+                        <input type="text" id="chiefComplaint" placeholder="e.g. Sharp pain in lower back">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="hpi">History of Present Illness (HPI)</label>
+                        <textarea id="hpi" rows="3" placeholder="Describe the onset, duration, severity..."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="medicalHistory">Past Medical History</label>
+                        <textarea id="medicalHistory" rows="2"
+                            placeholder="Relevant past conditions, surgeries..."></textarea>
+                    </div>
+
+                    <!-- Vitals -->
+                    <div class="form-group full-width mt-4">
+                        <h3>Vital Signs</h3>
+                        <div class="divider"></div>
+                    </div>
+
+                    <div class="vitals-grid full-width">
+                        <div class="form-group">
+                            <label for="bp">BP (mmHg)</label>
+                            <input type="text" id="bp" placeholder="120/80">
+                        </div>
+                        <div class="form-group">
+                            <label for="hr">HR (bpm)</label>
+                            <input type="number" id="hr" placeholder="72">
+                        </div>
+                        <div class="form-group">
+                            <label for="temp">Temp (°F/°C)</label>
+                            <input type="text" id="temp" placeholder="98.6">
+                        </div>
+                        <div class="form-group">
+                            <label for="rr">RR (rpm)</label>
+                            <input type="number" id="rr" placeholder="16">
+                        </div>
+                        <div class="form-group">
+                            <label for="spo2">SpO2 (%)</label>
+                            <input type="number" id="spo2" placeholder="98">
+                        </div>
+                    </div>
+
+                    <!-- Exam & Plan -->
+                    <div class="form-group full-width mt-4">
+                        <h3>Assessment & Plan</h3>
+                        <div class="divider"></div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="physicalExam">Objective / Physical Exam</label>
+                        <textarea id="physicalExam" rows="3"
+                            placeholder="General appearance, relevant system findings..."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="assessment">Assessment (Diagnosis)</label>
+                        <textarea id="assessment" rows="2" placeholder="Primary diagnosis..."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="plan">Plan / Recommendations</label>
+                        <textarea id="plan" rows="3"
+                            placeholder="Prescriptions, follow-up, tests ordered..."></textarea>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="form-group full-width action-buttons">
+                        <button type="button" class="btn btn-secondary" id="clearBtn">
+                            <i class="fa-solid fa-eraser"></i> Clear Form
+                        </button>
+                        <button type="button" class="btn btn-primary" id="generateBtn">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Complete Report
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Right Side: Live Report Preview -->
+            <section class="card output-section">
+                <div class="card-header header-between">
+                    <div>
+                        <h2><i class="fa-regular fa-file-lines"></i> Report Preview</h2>
+                        <span class="status-badge live">Live Update Active</span>
+                    </div>
+                    <div class="output-actions">
+                        <button class="icon-btn tooltip-container" id="copyBtn" aria-label="Copy">
+                            <i class="fa-regular fa-copy"></i>
+                            <span class="tooltip">Copy to Clipboard</span>
+                        </button>
+                        <button class="icon-btn tooltip-container" id="printBtn" aria-label="Print/PDF">
+                            <i class="fa-solid fa-print"></i>
+                            <span class="tooltip">Print / Download PDF</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="report-container" id="printable-area">
+                    <div class="report-header">
+                        <div class="clinic-info">
+                            <strong>MedScribe Clinical Notes</strong>
+                        </div>
+                        <div class="report-meta">
+                            Generated: <span id="report-timestamp">--</span>
+                        </div>
+                    </div>
+                    <hr class="report-divider">
+
+                    <div class="report-content" id="reportPreview">
+                        <!-- Dynamic Content Will Be Injected Here -->
+                        <div class="placeholder-state">
+                            <i class="fa-solid fa-file-medical empty-icon"></i>
+                            <p>Start typing in the form to see the automated patient summary here.</p>
+                        </div>
+                    </div>
+
+                    <div class="report-footer" style="display: none;">
+                        <hr class="report-divider">
+                        <div class="signature-line">
+                            <p>Provider Signature:</p>
+                            <div class="sig-box"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
