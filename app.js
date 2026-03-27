@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
 
                 // Fetch from Python Backend
-                const backendUrl = `http://${window.location.hostname}:8000/api/generate-report`;
+                const backendUrl = `http://127.0.0.1:8000/api/generate-report`;
                 const response = await fetch(backendUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
